@@ -28,6 +28,12 @@ func Fetcher(url string) ([]byte, error) {
 		return nil, fmt.Errorf("wrong state code : %d\n", response.StatusCode)
 	}
 
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("wrong state code : %d", response.StatusCode)
+	}
+
 	bodyReder := bufio.NewReader(response.Body)
 	e := determineEncoding(bodyReder)
 	utf8Reader := transform.NewReader(bodyReder, e.NewDecoder())
