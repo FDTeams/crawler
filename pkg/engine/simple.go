@@ -22,7 +22,7 @@ func (s SimpleEngine) Run(seeds ...Request) {
 			continue
 		}
 
-		requests = append(requests, parserResult.Request...)
+		requests = append(requests, parserResult.Requests...)
 
 		for _, item := range parserResult.Items {
 			log.Printf("Got item %v\n", item)
